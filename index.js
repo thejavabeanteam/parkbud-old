@@ -70,7 +70,7 @@ ReactDOM.render(
 
 
 const members = 'Mora, Mai, Ronald, Chau, and Elshaday';
-const element = <h1>Introducing the ParkBud Developers {members}</h1>;
+const element = <h2>Introducing the ParkBud Developers {members}</h2>;
 
 ReactDOM.render(
  element,
