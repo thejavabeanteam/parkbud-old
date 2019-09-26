@@ -67,3 +67,12 @@ ReactDOM.render(
  <h1>Hello World!!</h1>,
  document.getElementById('root')
 );
+
+
+const members = 'Mora, Mai, Ronald, Chau';
+const element = <h1>Introducing the ParkBud Developers {members}</h1>;
+
+ReactDOM.render(
+ element,
+ document.getElementById('root')
+ ); 
