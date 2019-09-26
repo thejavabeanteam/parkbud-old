@@ -19,6 +19,7 @@
   "homepage": "https://github.com/thejavabeanteam/project#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "axios": "^0.19.0"
+    "axios": "^0.19.0",
+    "react": "^16.9.0"
   }
 }
