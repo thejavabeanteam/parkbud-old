@@ -10,9 +10,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "app/node_modules/.bin/react-scripts build",
+    "test": "app/node_modules/.bin/react-scripts test",
+    "eject": "app/node_modules/.bin/react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
