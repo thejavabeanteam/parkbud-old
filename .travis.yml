@@ -17,7 +17,10 @@ before_script:
 script:
 - npm test
 - npm run build-client
+before_deploy:
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
 deploy:
+  skip_cleanup: true # prevents travis from deleting the build
   provider: heroku
   api_key:
     secure: jyaqZIlHquP82AYwGBQn1bMcp6UsazTiCVj4WyNJ1nVvtefPd0C6Hk8wsNv4huYKk1j88JEUjGGreBFbIUl7Mo5cDca8gxdNafxv63NC4wQlKskYarUoR5axWFoE/2FSsUutPOJ3h20ZmgQQNftgBg8CTQ8nBntt1pud4iFqSe5sFMIOL3HYrgt2mpNwmsnh+Lh6/WJj6/+AjfPUR7zh4r/cZfhNa7B9P6Hm8moNjj0PXxWFXdu0NKnzyhOxoN+HncV8WkGgqvLxT1LpckOjZe4uSj8un7YCfyY+wYLyB7MEDI1fC5mqk/VUnfiSChfQ0YC+33kRvt+38b1q40ssQBX0c9h6VJoO0ipP0ZLdQh0978Wp0ZV8B3DBReIBfyt51mHosZ1FqO1fLDSTgga3KrRj095ksVd4Uuy6b4xobyRpJjU9ZHPovW93ebUQPiWU1M63s/4ybvYtDK7m7ieky5peS0DWqxaQhRQsgvPE2II3WQwLymvsW17dLUV7f8Ww/rtvUeriJMgjJGXc3615yjtnjiwCCg1oy9MMFIcMP2huglniIjLet+S6qCBi5l26Yj2tWWWlqC9uvihSQW/26DGr+SE3cUBAU56S/LqjERAL2KMMN6iepWANZGZxtXqYXCQlxoN5EnAEKxmY7LOOtRmVSIzFSdV0CuRtG4RXMcw=
