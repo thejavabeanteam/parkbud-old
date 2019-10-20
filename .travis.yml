@@ -15,14 +15,16 @@ install:
 before_script:
   - psql -c 'create database "parkbud-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: parkbud
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: SwOzSrxsaRtl170CLVj9M+REhf7qjQoSA3eVNzPv9KBIxb40/NPpnhsruhtomMrnV1eMTd/nBVlvTkwnXWAVHGajOXN86h4vdS6Yhw7D3h1AvMMRuTRN/vehciXVnC79TEMcw0SaenYkyuBnSDHSTekInh0YoZ/6KSPoZ56JKLdi8fNsX/vmaeqRGSBjREz9/ggp+NZ66nFiZd0ArawKRs6P/fUDb1v1s7rx+AketJQkokoznsO8FV8pfjRhQK8QnV9PKja19WLvMjckT5KG3LzTIux+d0+0uI72atBnWm8r07+t9un3e57nrlU/d+S+5gB2N/vDXqIj4IgUOmiO2XtOhsiXXi0c44rVTFDf8F6mJEXpScLwzbkVW0gsIPcKU/B+VuulZ1b9f+/dRDLaIRAqXJFjqKVdxKEMt7rUhwDJL38asl6gd8R+R3zTWsTxVg83tdIZdpagtUObZW3B4+Xbbnr/6wsCPuLFT0/Tpt0mG1r+Y951Qdj/TC1CSEoKbOn6BvT7t9eTlhYkdQrRMpCj2z8eP/Vasq0TRq9f0nrJK5zV9tERsLPmMXmstmWRaxHp2isa0nPF2vIAstsXTSvLN0OjV9YcLDzN4eeW/POdPj+oee+i2PxG1wxpmyjDn8JbsXcbPg/j4ywkA/UPCTalSBWkUIeYLpgkjvD925M=
