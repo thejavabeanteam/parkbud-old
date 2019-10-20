@@ -1,30 +1,27 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+- node
 services:
-  - postgresql # starts up postgres
+- postgresql
 addons:
-  postgresql: '10' # recent postgres version on Travis
-dist: xenial # uses xenial environment
+  postgresql: '10'
+dist: xenial
 notifications:
   email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    on_success: change
+    on_failure: always
 install:
-  - npm ci # faster, goes only from package-lock
+- npm ci
 before_script:
-  - psql -c 'create database "parkbud-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+- psql -c 'create database "parkbud-test";' -U postgres
 script:
-  - npm test # test the code
-  - npm run build-client # make the bundle
-before_deploy: # omit node_modules, since we set skip_cleanup below
-  - rm -rf node_modules
-deploy: # see README for details on these keys
-  # prevents travis from deleting the build
-  skip_cleanup: true
+- npm test
+- npm run build-client
+deploy:
   provider: heroku
-  # app should be your heroku app name; see README
-  app: parkbud
-  # the secure key indicates an encrypted value; see README
   api_key:
-    secure: SwOzSrxsaRtl170CLVj9M+REhf7qjQoSA3eVNzPv9KBIxb40/NPpnhsruhtomMrnV1eMTd/nBVlvTkwnXWAVHGajOXN86h4vdS6Yhw7D3h1AvMMRuTRN/vehciXVnC79TEMcw0SaenYkyuBnSDHSTekInh0YoZ/6KSPoZ56JKLdi8fNsX/vmaeqRGSBjREz9/ggp+NZ66nFiZd0ArawKRs6P/fUDb1v1s7rx+AketJQkokoznsO8FV8pfjRhQK8QnV9PKja19WLvMjckT5KG3LzTIux+d0+0uI72atBnWm8r07+t9un3e57nrlU/d+S+5gB2N/vDXqIj4IgUOmiO2XtOhsiXXi0c44rVTFDf8F6mJEXpScLwzbkVW0gsIPcKU/B+VuulZ1b9f+/dRDLaIRAqXJFjqKVdxKEMt7rUhwDJL38asl6gd8R+R3zTWsTxVg83tdIZdpagtUObZW3B4+Xbbnr/6wsCPuLFT0/Tpt0mG1r+Y951Qdj/TC1CSEoKbOn6BvT7t9eTlhYkdQrRMpCj2z8eP/Vasq0TRq9f0nrJK5zV9tERsLPmMXmstmWRaxHp2isa0nPF2vIAstsXTSvLN0OjV9YcLDzN4eeW/POdPj+oee+i2PxG1wxpmyjDn8JbsXcbPg/j4ywkA/UPCTalSBWkUIeYLpgkjvD925M=
+    secure: jyaqZIlHquP82AYwGBQn1bMcp6UsazTiCVj4WyNJ1nVvtefPd0C6Hk8wsNv4huYKk1j88JEUjGGreBFbIUl7Mo5cDca8gxdNafxv63NC4wQlKskYarUoR5axWFoE/2FSsUutPOJ3h20ZmgQQNftgBg8CTQ8nBntt1pud4iFqSe5sFMIOL3HYrgt2mpNwmsnh+Lh6/WJj6/+AjfPUR7zh4r/cZfhNa7B9P6Hm8moNjj0PXxWFXdu0NKnzyhOxoN+HncV8WkGgqvLxT1LpckOjZe4uSj8un7YCfyY+wYLyB7MEDI1fC5mqk/VUnfiSChfQ0YC+33kRvt+38b1q40ssQBX0c9h6VJoO0ipP0ZLdQh0978Wp0ZV8B3DBReIBfyt51mHosZ1FqO1fLDSTgga3KrRj095ksVd4Uuy6b4xobyRpJjU9ZHPovW93ebUQPiWU1M63s/4ybvYtDK7m7ieky5peS0DWqxaQhRQsgvPE2II3WQwLymvsW17dLUV7f8Ww/rtvUeriJMgjJGXc3615yjtnjiwCCg1oy9MMFIcMP2huglniIjLet+S6qCBi5l26Yj2tWWWlqC9uvihSQW/26DGr+SE3cUBAU56S/LqjERAL2KMMN6iepWANZGZxtXqYXCQlxoN5EnAEKxmY7LOOtRmVSIzFSdV0CuRtG4RXMcw=
+  app: parkbud-dev
+  on:
+    repo: thejavabeanteam/parkbud
+    branch: dev
