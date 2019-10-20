@@ -16,7 +16,7 @@ before_script:
 - psql -c 'create database "parkbud-test";' -U postgres
 script:
 - npm test
-- npm run build-client
+- npm start-dev
 before_deploy:
   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 deploy:
